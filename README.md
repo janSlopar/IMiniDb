@@ -1,0 +1,2 @@
+# NTP---movieDB
+# Projekt movieDB 
