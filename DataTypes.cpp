@@ -2,10 +2,32 @@
 void Korisnik::setIme(AnsiString _ime){
 	if (_ime.IsEmpty())
 		throw Exception("Ime ne smije biti prazno!");
-    ime = _ime;
+	ime = _ime;
 }
 
-AnsiString Korisnik::getIme() const{ return ime;}
+void Korisnik::setPrezime(AnsiString _prezime){
+	if (_prezime.IsEmpty())
+		throw Exception("Prezime ne smije biti prazno!");
+	prezime = _prezime;
+}
+
+void Korisnik::setKorisnickoIme(AnsiString _korIme){
+	if (_korIme.IsEmpty())
+		throw Exception("Korisničko ime ne smije biti prazno!");
+	korIme = _korIme;
+}
+void Korisnik::setEmail(AnsiString _email){
+	if (_email.IsEmpty())
+		throw Exception("E-mail ne smije biti prazan!");
+	email = _email;
+}
+void Korisnik::setLozinka(AnsiString _lozinka){
+	if(_lozinka.IsEmpty())
+		throw Exception("Lozinka ne smije biti prazna!");
+    lozinka = _lozinka;
+}
+
+AnsiString Korisnik::getKorIme() const { return korIme;}
 
 Korisnik::Korisnik(int id, AnsiString username, AnsiString email, AnsiString lozinka) : id(id), username(username), email(email){
 	this->lozinkaHash  = hashirajLozinku(lozinka);
@@ -43,7 +65,7 @@ Film::Film(int id, AnsiString naslov, int godina, int trajanje, AnsiString opis)
 
 float Film::izracunajOcjenu() {
     // dohvati sve recenzije za ovaj film iz baze i izračunaj prosjek
-    //else return 0.0;
+    // else return 0.0;
 }
 
 

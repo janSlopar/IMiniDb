@@ -16,16 +16,30 @@ __fastcall TFormRegistracija::TFormRegistracija(TComponent* Owner)
 }
 //---------------------------------------------------------------------------
 
+/*
+bool sadrziBrojeve(String s)
+{
+    for (int i = 1; i <= s.Length(); i++) {
+        if (!IsDigit(s[i])) return false;
+    }
+    return true;
+}
+*/
 
 void __fastcall TFormRegistracija::ButtonRegistrirajClick(TObject *Sender)
 {
 	Korisnik K_test;
 
-	K_test.setIme(EditIme->Text	);
+	K_test.setIme(EditIme->Text);
+    K_test.setPrezime(EditPrezime->Text);
+	K_test.setKorisnickoIme(EditKorIme->Text);
+	K_test.setEmail(EditEmail->Text);
+    K_test.setLozinka(EditLozinka->Text);
 
 	Application->MessageBoxW("klik Radi!", MB_OK|MB_ICONQUESTION);
-	ShowMessage("Pozdrav, " + K_test.getIme() + "!");
+	ShowMessage("Pozdrav, " + K_test.getKorIme() + "!");
 
 }
 //---------------------------------------------------------------------------
+
 

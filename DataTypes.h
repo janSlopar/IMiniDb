@@ -4,11 +4,16 @@
 
 	protected:
 	int id;
-	AnsiString ime, prezime, username, email, lozinkaHash;
+	AnsiString ime, prezime, korIme, email, lozinkaHash;
 
 	public:
 	void setIme(AnsiString _ime);
-	AnsiString getIme() const;
+	void setPrezime(AnsiString _prezime);
+	void setKorisnickoIme(AnsiString _korIme);
+	void setEmail(AnsiString _email);
+    void setLozinka(AnsiString _lozinka);
+
+	AnsiString getKorIme() const;
 
     Korisnik(){}
 	Korisnik(int id, AnsiString ime, Ansistring prezime, AnsiString username, AnsiString email, AnsiString lozinka);

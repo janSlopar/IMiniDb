@@ -4,19 +4,21 @@ object FormRegistracija: TFormRegistracija
   Caption = 'Registracija'
   ClientHeight = 943
   ClientWidth = 1496
-  Color = clBtnFace
+  Color = clCream
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
   TextHeight = 15
-  object GroupBox1: TGroupBox
+  object GroupBoxRegistracija: TGroupBox
     Left = 440
-    Top = 248
+    Top = 240
     Width = 537
     Height = 345
-    Caption = 'GroupBox1'
+    Color = clBlanchedalmond
+    ParentBackground = False
+    ParentColor = False
     TabOrder = 0
     object Label1: TLabel
       Left = 32
@@ -54,35 +56,35 @@ object FormRegistracija: TFormRegistracija
       Caption = 'lozinka:'
     end
     object EditIme: TEdit
-      Left = 192
-      Top = 70
+      Left = 200
+      Top = 75
       Width = 121
       Height = 23
       TabOrder = 0
     end
-    object Edit1: TEdit
-      Left = 192
+    object EditPrezime: TEdit
+      Left = 200
       Top = 104
       Width = 121
       Height = 23
       TabOrder = 1
     end
     object EditKorIme: TEdit
-      Left = 192
+      Left = 200
       Top = 144
       Width = 121
       Height = 23
       TabOrder = 2
     end
     object EditEmail: TEdit
-      Left = 192
+      Left = 200
       Top = 184
       Width = 121
       Height = 23
       TabOrder = 3
     end
     object EditLozinka: TEdit
-      Left = 192
+      Left = 200
       Top = 224
       Width = 121
       Height = 23

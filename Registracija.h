@@ -11,11 +11,11 @@
 class TFormRegistracija : public TForm
 {
 __published:	// IDE-managed Components
-	TGroupBox *GroupBox1;
+	TGroupBox *GroupBoxRegistracija;
 	TLabel *Label1;
 	TLabel *Label2;
 	TEdit *EditIme;
-	TEdit *Edit1;
+	TEdit *EditPrezime;
 	TLabel *Label3;
 	TEdit *EditKorIme;
 	TLabel *Label4;

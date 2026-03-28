@@ -6,8 +6,8 @@
 #include <DataTypes.h>
 #include <DataTypes.cpp>
 //---------------------------------------------------------------------------
-USEFORM("Unit1.cpp", Form1);
 USEFORM("Registracija.cpp", FormRegistracija);
+USEFORM("Unit1.cpp", Form1);
 //---------------------------------------------------------------------------
 int WINAPI _tWinMain(HINSTANCE, HINSTANCE, LPTSTR, int)
 {
