@@ -107,4 +107,14 @@ object FormRegistracija: TFormRegistracija
       OnClick = ButtonRegistrirajClick
     end
   end
+  object ButtonKonf: TButton
+    Left = 1352
+    Top = 8
+    Width = 134
+    Height = 33
+    Caption = 'Spremi konfiguraciju'
+    TabOrder = 1
+    StyleName = 'Ruby Graphite'
+    OnClick = ButtonKonfClick
+  end
 end

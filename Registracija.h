@@ -23,8 +23,10 @@ __published:	// IDE-managed Components
 	TLabel *Label5;
 	TEdit *EditLozinka;
 	TButton *ButtonRegistriraj;
+	TButton *ButtonKonf;
 	void __fastcall ButtonRegistrirajClick(TObject *Sender);
 	void __fastcall FormCreate(TObject *Sender);
+	void __fastcall ButtonKonfClick(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
 	__fastcall TFormRegistracija(TComponent* Owner);

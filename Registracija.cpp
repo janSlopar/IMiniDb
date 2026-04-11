@@ -38,17 +38,29 @@ void __fastcall TFormRegistracija::ButtonRegistrirajClick(TObject *Sender)
 
 void __fastcall TFormRegistracija::FormCreate(TObject *Sender)
 {
-    TDateTime today = TDateTime::CurrentDateTime();
 
-    String path = TPath::Combine(TPath::GetDocumentsPath(), "postavke.ini");
-
+	String path = TPath::Combine(TPath::GetDocumentsPath(), "postavke.ini");
 	TIniFile* ini = new TIniFile(path);
 
-	ini->WriteString("Stilovi", "stil1", FormRegistracija->StyleName);
-	ini->WriteString("Stilovi", "stil2", GroupBoxRegistracija->StyleName);
-    ini->WriteString("Stilovi", "zadnja-pohrana", Date());
+	ButtonKonf->StyleName = ini->ReadString("Stilovi", "stil2", "0");
 
-	delete ini;
+	ini->WriteString("HR", "label1", Label1->Caption);
+	ini->WriteString("HR", "label2", Label2->Caption);
+	ini->WriteString("HR", "label3", Label3->Caption);
+	ini->WriteString("HR", "label4", Label4->Caption);
+	ini->WriteString("HR", "label5", Label5->Caption);
+	ini->WriteString("HR", "ButtonRegistriraj", ButtonRegistriraj->Caption);
+	ini->WriteString("HR", "ButtonKonf", ButtonKonf->Caption);
+
+    ini->WriteString("ENG", "label1", "Name:");
+	ini->WriteString("ENG", "label2", "Surname:");
+	ini->WriteString("ENG", "label3", "Username:");
+	ini->WriteString("ENG", "label4", "e-mail:");
+	ini->WriteString("ENG", "label5", "password:");
+	ini->WriteString("ENG", "ButtonRegistriraj", "Register!");
+	ini->WriteString("ENG", "ButtonKonf", "Save config");
+
+    delete ini;
 
 	TRegistry* reg = new TRegistry;
 	reg->RootKey = HKEY_LOCAL_MACHINE;
@@ -77,11 +89,11 @@ void __fastcall TFormRegistracija::FormCreate(TObject *Sender)
 			if (!reg->ValueExists("IMiniDB"))
 				reg->WriteString("IMiniDB", FormatDateTime("dd.mm.yyyy hh:nn:ss", Now()));
 
-			if (!reg->ValueExists("IMiniDB_korisnika"))
-				reg->WriteInteger("IMiniDB_korisnika", 0);
+			if (!reg->ValueExists("IMiniDB_br_otvaranja"))
+				reg->WriteInteger("IMiniDB_br_otvaranja", 0);
 
-			int trenutni = reg->ReadInteger("IMiniDB_korisnika");
-			reg->WriteInteger("IMiniDB_korisnika", trenutni + 1);
+			int trenutni = reg->ReadInteger("IMiniDB_br_otvaranja");
+			reg->WriteInteger("IMiniDB_br_otvaranja", trenutni + 1);
 
 			reg->CloseKey();
 		}
@@ -90,6 +102,21 @@ void __fastcall TFormRegistracija::FormCreate(TObject *Sender)
 	{
 		reg->Free();
 	}
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TFormRegistracija::ButtonKonfClick(TObject *Sender)
+{
+	String path = TPath::Combine(TPath::GetDocumentsPath(), "postavke.ini");
+
+	TIniFile* ini = new TIniFile(path);
+
+	ini->WriteString("Stilovi", "stil1", FormRegistracija->StyleName);
+	ini->WriteString("Stilovi", "stil2", GroupBoxRegistracija->StyleName);
+	ini->WriteString("Stilovi", "boja1", FormRegistracija->Color);
+	ini->WriteString("Stilovi", "zadnja-pohrana", FormatDateTime("dd.mm.yyyy hh:nn:ss", Now()));
+
+	delete ini;
 }
 //---------------------------------------------------------------------------
 
