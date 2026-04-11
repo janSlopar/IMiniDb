@@ -5,6 +5,8 @@
 
 #include "Recenzija.h"
 #include "DataTypes.h"
+#include <registry.hpp>
+#include <System.IOUtils.hpp>
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
@@ -17,8 +19,7 @@ __fastcall TFormRecenzija::TFormRecenzija(TComponent* Owner)
 //---------------------------------------------------------------------------
 void __fastcall TFormRecenzija::ButtonSpremiClick(TObject *Sender)
 {
-	if (edtIDRecenzije->Text.IsEmpty() 	||
-		memTekst->Lines->Text.IsEmpty() ||
+	if (memTekst->Lines->Text.IsEmpty() ||
 		edtFilmID->Text.IsEmpty() 		||
 		edtKorisnikID->Text.IsEmpty())
 	{
@@ -28,7 +29,7 @@ void __fastcall TFormRecenzija::ButtonSpremiClick(TObject *Sender)
 
 	//int idRecenzije   = iz baze +1
 	String tekst      = memTekst->Lines->Text;
-    int ocjena        = spnOcjena->Value;
+    int ocjena 		  = TrackBarOcjena->Position;
 	TDateTime datum   = dtpDatum->Date;
     int filmID        = StrToInt(edtFilmID->Text);
     int korisnikID    = StrToInt(edtKorisnikID->Text);
@@ -56,9 +57,21 @@ void __fastcall TFormRecenzija::ButtonSpremiClick(TObject *Sender)
 void __fastcall TFormRecenzija::ButtonOdustaniClick(TObject *Sender)
 {
     memTekst->Clear();
-    spnOcjena->Value = 5;
     dtpDatum->Date = Now();
     edtFilmID->Clear();
 	edtKorisnikID->Clear();
 }
 //---------------------------------------------------------------------------
+void __fastcall TFormRecenzija::FormCreate(TObject *Sender)
+{
+ 	String path = TPath::Combine(TPath::GetDocumentsPath(), "postavke.ini");
+
+	TIniFile* ini = new TIniFile(path);
+
+	FormRecenzija->StyleName = ini->ReadString("Stilovi", "stil1", "Obsidian");
+	GroupBoxRecenzija->StyleName = ini->ReadString("Stilovi", "stil2", "Obsidian");
+
+	delete ini;
+}
+//---------------------------------------------------------------------------
+

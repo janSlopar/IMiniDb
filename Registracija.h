@@ -24,6 +24,7 @@ __published:	// IDE-managed Components
 	TEdit *EditLozinka;
 	TButton *ButtonRegistriraj;
 	void __fastcall ButtonRegistrirajClick(TObject *Sender);
+	void __fastcall FormCreate(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
 	__fastcall TFormRegistracija(TComponent* Owner);

@@ -5,6 +5,8 @@
 
 #include "Prijava.h"
 #include "DataTypes.h"
+#include <registry.hpp>
+#include <System.IOUtils.hpp>
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
@@ -35,4 +37,19 @@ void __fastcall TFormPrijava::ButtonPrijavaClick(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 
+
+void __fastcall TFormPrijava::FormCreate(TObject *Sender)
+{
+
+	String path = TPath::Combine(TPath::GetDocumentsPath(), "postavke.ini");
+
+	TIniFile* ini = new TIniFile(path);
+
+	FormPrijava->StyleName = ini->ReadString("Stilovi", "stil1", "Obsidian");
+	GroupBoxPrijava->StyleName = ini->ReadString("Stilovi", "stil2", "Obsidian");
+
+	delete ini;
+
+}
+//---------------------------------------------------------------------------
 

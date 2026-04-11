@@ -1,4 +1,8 @@
-﻿// ================================================================== KORISNIK ==================================================================
+﻿#include <vcl.h>
+#pragma hdrstop
+#include "DataTypes.h"
+
+// ================================================================== KORISNIK ==================================================================
 void Korisnik::setIme(AnsiString _ime){
 	if (_ime.IsEmpty())
 		throw Exception("Ime ne smije biti prazno!");
@@ -24,12 +28,12 @@ void Korisnik::setEmail(AnsiString _email){
 void Korisnik::setLozinka(AnsiString _lozinka){
 	if(_lozinka.IsEmpty())
 		throw Exception("Lozinka ne smije biti prazna!");
-    lozinka = _lozinka;
+    lozinkaHash = _lozinka;
 }
 
 AnsiString Korisnik::getKorIme() const { return korIme;}
 
-Korisnik::Korisnik(int id, AnsiString username, AnsiString email, AnsiString lozinka) : id(id), username(username), email(email){
+Korisnik::Korisnik(int id, AnsiString korIme, AnsiString email, AnsiString lozinka) : id(id), korIme(korIme), email(email){
 	this->lozinkaHash  = hashirajLozinku(lozinka);
 }
 

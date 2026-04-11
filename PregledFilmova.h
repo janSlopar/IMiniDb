@@ -16,6 +16,7 @@ __published:	// IDE-managed Components
 	TEdit *Edit2;
 	TLabel *Label1;
 	TLabel *Label2;
+	void __fastcall FormCreate(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
 	__fastcall TFormSviFilmovi(TComponent* Owner);

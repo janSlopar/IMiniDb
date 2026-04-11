@@ -18,6 +18,7 @@ __published:	// IDE-managed Components
 	TEdit *EditKorImePrijava;
 	TEdit *EditLozinkaPrijava;
 	void __fastcall ButtonPrijavaClick(TObject *Sender);
+	void __fastcall FormCreate(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
 	__fastcall TFormPrijava(TComponent* Owner);

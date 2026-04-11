@@ -9,7 +9,7 @@
 #include <Vcl.ComCtrls.hpp>
 #include <Vcl.Samples.Spin.hpp>
 
-// Boje (BGR format!)
+
 #define BOJA_POZADINA     (TColor)0x1A1A1A   // forma pozadina
 #define BOJA_INPUT        (TColor)0x2C2C2C   // edit, memo pozadina
 #define BOJA_GRUPBOX      (TColor)0x242424   // groupbox pozadina

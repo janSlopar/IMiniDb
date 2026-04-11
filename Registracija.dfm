@@ -1,15 +1,18 @@
 object FormRegistracija: TFormRegistracija
   Left = 0
   Top = 0
+  BorderWidth = 1
   Caption = 'Registracija'
-  ClientHeight = 943
-  ClientWidth = 1496
-  Color = clCream
+  ClientHeight = 941
+  ClientWidth = 1494
+  Color = clBlack
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
+  StyleName = 'Obsidian'
+  OnCreate = FormCreate
   TextHeight = 15
   object GroupBoxRegistracija: TGroupBox
     Left = 440
@@ -20,6 +23,7 @@ object FormRegistracija: TFormRegistracija
     ParentBackground = False
     ParentColor = False
     TabOrder = 0
+    StyleName = 'Ruby Graphite'
     object Label1: TLabel
       Left = 32
       Top = 73
@@ -56,6 +60,7 @@ object FormRegistracija: TFormRegistracija
       Caption = 'lozinka:'
     end
     object EditIme: TEdit
+      Tag = 1
       Left = 200
       Top = 75
       Width = 121
@@ -63,6 +68,7 @@ object FormRegistracija: TFormRegistracija
       TabOrder = 0
     end
     object EditPrezime: TEdit
+      Tag = 1
       Left = 200
       Top = 104
       Width = 121

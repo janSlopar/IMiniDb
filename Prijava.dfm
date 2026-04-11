@@ -10,6 +10,7 @@ object FormPrijava: TFormPrijava
   Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
+  OnCreate = FormCreate
   TextHeight = 15
   object GroupBoxPrijava: TGroupBox
     Left = 360

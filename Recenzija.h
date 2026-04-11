@@ -17,15 +17,16 @@ __published:	// IDE-managed Components
 	TButton *ButtonSpremi;
 	TButton *ButtonOdustani;
 	TMemo *memTekst;
-	TSpinButton *spnOcjena;
 	TDateTimePicker *dtpDatum;
 	TLabel *Label1;
 	TEdit *edtFilmID;
 	TEdit *edtKorisnikID;
 	TLabel *Label2;
 	TLabel *Label3;
+	TTrackBar *TrackBarOcjena;
 	void __fastcall ButtonSpremiClick(TObject *Sender);
 	void __fastcall ButtonOdustaniClick(TObject *Sender);
+	void __fastcall FormCreate(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
 	__fastcall TFormRecenzija(TComponent* Owner);
