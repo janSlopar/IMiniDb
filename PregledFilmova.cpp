@@ -60,11 +60,25 @@ void __fastcall TFormSviFilmovi::FormCreate(TObject *Sender)
 	ini->WriteString("ENG", "label7", "Year");
 	ini->WriteString("ENG", "label8", "Duration");
 	ini->WriteString("ENG", "label9", "Plot");
-	ini->WriteString("ENG", "ButtonDodajNoviOFilm", "Add new Movie");
-	ini->WriteString("ENG", "ButtonUkloni", "Remove Movie");
-	ini->WriteString("ENG", "ButtonDodajWatchlistu", "Add");
+	ini->WriteString("ENG", "ButtonDodajNoviOFilm", "Add to Favourites");
+	ini->WriteString("ENG", "ButtonUkloni", "Remove from Favourites");
+	ini->WriteString("ENG", "ButtonDodajWatchlistu", "Add to Watchlist");
 	ini->WriteString("ENG", "ButtonOmiljeniFilmovi", "Favourite movies");
 	//GroupBoxRecenzija->StyleName = ini->ReadString("Stilovi", "stil2", "Obsidian");
+
+	ButtonDodajNoviOFilm->StyleName = ini->ReadString("Stilovi", "stil2", "0");
+	ButtonDodajWatchlistu->StyleName = ini->ReadString("Stilovi", "stil2", "0");
+	ButtonOmiljeniFilmovi->StyleName = ini->ReadString("Stilovi", "stil2", "0");
+	ButtonPregledajListu->StyleName = ini->ReadString("Stilovi", "stil2", "0");
+    ButtonUkloni->StyleName = ini->ReadString("Stilovi", "stil2", "0");
+	ButtonHRV->StyleName = ini->ReadString("Stilovi", "stil2", "0");
+	ButtonENG->StyleName = ini->ReadString("Stilovi", "stil2", "0");
+
+    ini->WriteString("HR", "LabelOmiljeniFilmoviNaslov", "Omiljeni Filmovi");
+	ini->WriteString("HR", "LabelListaZaGledanje", "Lista za gledanje");
+	ini->WriteString("ENG", "LabelOmiljeniFilmoviNaslov", "Favourite Movies");
+	ini->WriteString("ENG", "LabelListaZaGledanje", "Watchlist");
+
 
 	delete ini;
 
@@ -73,6 +87,20 @@ void __fastcall TFormSviFilmovi::FormCreate(TObject *Sender)
 	listViewOFilmovi->Columns->Items[1]->Width = w * 1.5 / 16;  // godina
 	listViewOFilmovi->Columns->Items[2]->Width = w * 1.5 / 16;  // trajanje
 	listViewOFilmovi->Columns->Items[3]->Width = w * 11 / 16;  // opis
+
+	LabelOmiljeniFilmoviNaslov->Font->Size    = 16;
+	LabelOmiljeniFilmoviNaslov->Font->Style   = TFontStyles() << fsBold;
+	LabelOmiljeniFilmoviNaslov->Font->Color   = (TColor)0x00FFD700;
+	LabelOmiljeniFilmoviNaslov->Alignment     = taCenter;
+	LabelOmiljeniFilmoviNaslov->Transparent   = true;
+	LabelOmiljeniFilmoviNaslov->Caption       = "";
+
+    LabelListaZaGledanje->Font->Size  = 16;
+	LabelListaZaGledanje->Font->Style = TFontStyles() << fsBold;
+	LabelListaZaGledanje->Font->Color = (TColor)0x00FFD700;
+	LabelListaZaGledanje->Alignment   = taCenter;
+	LabelListaZaGledanje->Transparent = true;
+	LabelListaZaGledanje->Visible     = false;
 }
 //---------------------------------------------------------------------------
 
@@ -87,7 +115,8 @@ void __fastcall TFormSviFilmovi::ButtonOmiljeniFilmoviClick(TObject *Sender)
 	stream->Position = 0;
 	Image1->Picture->LoadFromStream(stream);
 	delete stream;  */
-
+	LabelOmiljeniFilmoviNaslov->Visible = true;
+	LabelListaZaGledanje->Visible = false;
 	OsvjeziListu();
 }
 //---------------------------------------------------------------------------
@@ -244,8 +273,60 @@ void __fastcall TFormSviFilmovi::ButtonDodajWatchlistuClick(TObject *Sender)
         ShowMessage("Uspjesno dodano!");
 
     } catch (Exception &e) {
-        ShowMessage("GRESKA: " + e.Message); // Ovo ce pokazati stvarnu gresku
+        ShowMessage("GRESKA: " + e.Message);
     }
 }
 //---------------------------------------------------------------------------
+
+void __fastcall TFormSviFilmovi::ButtonPregledajListuClick(TObject *Sender)
+{
+    LabelOmiljeniFilmoviNaslov->Visible = false;
+	LabelListaZaGledanje->Visible = true;
+	String jsonPath = TPath::Combine(ExtractFilePath(Application->ExeName), "..\\..\\listZaGledanje.json");
+
+    if (!TFile::Exists(jsonPath)) {
+        ShowMessage("Watchlista je prazna!");
+        return;
+    }
+
+    try {
+        TStringList *sl = new TStringList();
+        sl->LoadFromFile(jsonPath, TEncoding::UTF8);
+        String sadrzaj = sl->Text.Trim();
+        delete sl;
+
+        if (sadrzaj.IsEmpty()) {
+            ShowMessage("Watchlista je prazna!");
+            return;
+        }
+
+        TJSONValue *parsiran = TJSONObject::ParseJSONValue(sadrzaj);
+        if (!parsiran || !parsiran->ClassNameIs("TJSONArray")) {
+            ShowMessage("Greska pri citanju watchliste!");
+            delete parsiran;
+            return;
+        }
+
+        TJSONArray *jsonArray = static_cast<TJSONArray*>(parsiran);
+
+        listViewOFilmovi->Items->Clear();
+
+        for (int i = 0; i < jsonArray->Count; i++) {
+            TJSONObject *obj = static_cast<TJSONObject*>(jsonArray->Items[i]);
+
+            TListItem *item = listViewOFilmovi->Items->Add();
+            item->Caption = obj->GetValue("naslov")->Value();
+            item->SubItems->Add(obj->GetValue("godina")->Value());
+            item->SubItems->Add(obj->GetValue("trajanje")->Value());
+            item->SubItems->Add(obj->GetValue("opis")->Value());
+        }
+
+        delete parsiran;
+
+    } catch (Exception &e) {
+        ShowMessage("GRESKA: " + e.Message);
+    }
+}
+//---------------------------------------------------------------------------
+
 

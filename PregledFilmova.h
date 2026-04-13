@@ -33,6 +33,10 @@ __published:	// IDE-managed Components
 	TLabel *Label8;
 	TMemo *MemoOpisNovogFilma;
 	TLabel *Label9;
+	TButton *ButtonPregledajListu;
+	TLabel *Label1;
+	TLabel *LabelOmiljeniFilmoviNaslov;
+	TLabel *LabelListaZaGledanje;
 	void __fastcall FormCreate(TObject *Sender);
 	void __fastcall ButtonOmiljeniFilmoviClick(TObject *Sender);
 	void __fastcall ButtonHRVClick(TObject *Sender);
@@ -42,6 +46,7 @@ __published:	// IDE-managed Components
 	void __fastcall OsvjeziListu();
 	void __fastcall OcistiPolja();
 	void __fastcall ButtonDodajWatchlistuClick(TObject *Sender);
+	void __fastcall ButtonPregledajListuClick(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
 	__fastcall TFormSviFilmovi(TComponent* Owner);

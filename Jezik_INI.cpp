@@ -6,7 +6,7 @@
 #include <System.Classes.hpp>
 
 void PostaviJezik(TForm* AForm, String jezik) {
-    String p = TPath::Combine(TPath::GetDocumentsPath(), "postavke.ini");
+	String p = TPath::Combine(ExtractFilePath(Application->ExeName), "..\\..\\postavke.ini");
     TIniFile* ini = new TIniFile(p);
     try {
         TStrings* kljucevi = new TStringList();

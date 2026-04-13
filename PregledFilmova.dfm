@@ -45,6 +45,26 @@ object FormSviFilmovi: TFormSviFilmovi
     Height = 15
     Caption = 'Opis:'
   end
+  object Label1: TLabel
+    Left = 24
+    Top = 480
+    Width = 3
+    Height = 15
+  end
+  object LabelOmiljeniFilmoviNaslov: TLabel
+    Left = 8
+    Top = 16
+    Width = 148
+    Height = 15
+    Caption = 'LabelOmiljeniFilmoviNaslov'
+  end
+  object LabelListaZaGledanje: TLabel
+    Left = 8
+    Top = 16
+    Width = 108
+    Height = 15
+    Caption = 'labelListaZaGledanje'
+  end
   object ButtonDodajWatchlistu: TButton
     Left = 1104
     Top = 368
@@ -78,10 +98,10 @@ object FormSviFilmovi: TFormSviFilmovi
     OnClick = ButtonOmiljeniFilmoviClick
   end
   object listViewOFilmovi: TListView
-    Left = 7
-    Top = 504
-    Width = 858
-    Height = 497
+    Left = 0
+    Top = 54
+    Width = 774
+    Height = 441
     Columns = <
       item
         Caption = 'Naziv filma'
@@ -151,9 +171,18 @@ object FormSviFilmovi: TFormSviFilmovi
       'MemoOpisNovogFilma')
     TabOrder = 10
   end
+  object ButtonPregledajListu: TButton
+    Left = 1104
+    Top = 431
+    Width = 145
+    Height = 56
+    Caption = 'Pregledaj Listu'
+    TabOrder = 11
+    OnClick = ButtonPregledajListuClick
+  end
   object XMLDocumentOmiljeniFilmovi: TXMLDocument
     FileName = 'C:\Users\Jan\Desktop\4sem\NTP\omiljeniFilmovi.xml'
-    Left = 416
-    Top = 672
+    Left = 304
+    Top = 248
   end
 end
