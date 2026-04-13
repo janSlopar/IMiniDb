@@ -12,14 +12,14 @@ object FormSviFilmovi: TFormSviFilmovi
   OnCreate = FormCreate
   TextHeight = 15
   object Label6: TLabel
-    Left = 780
+    Left = 796
     Top = 147
     Width = 62
     Height = 15
     Caption = 'Naziv filma:'
   end
   object Label7: TLabel
-    Left = 801
+    Left = 817
     Top = 176
     Width = 41
     Height = 15
@@ -32,14 +32,14 @@ object FormSviFilmovi: TFormSviFilmovi
     Height = 497
   end
   object Label8: TLabel
-    Left = 798
+    Left = 814
     Top = 213
     Width = 44
     Height = 15
     Caption = 'Trajanje:'
   end
   object Label9: TLabel
-    Left = 815
+    Left = 831
     Top = 239
     Width = 27
     Height = 15
@@ -54,16 +54,16 @@ object FormSviFilmovi: TFormSviFilmovi
   object LabelOmiljeniFilmoviNaslov: TLabel
     Left = 8
     Top = 16
-    Width = 148
+    Width = 87
     Height = 15
-    Caption = 'LabelOmiljeniFilmoviNaslov'
+    Caption = 'Omiljeni FIlmovi'
   end
   object LabelListaZaGledanje: TLabel
     Left = 8
     Top = 16
-    Width = 108
+    Width = 86
     Height = 15
-    Caption = 'labelListaZaGledanje'
+    Caption = 'Lista za gledanje'
   end
   object ButtonDodajWatchlistu: TButton
     Left = 1104
@@ -75,14 +75,14 @@ object FormSviFilmovi: TFormSviFilmovi
     OnClick = ButtonDodajWatchlistuClick
   end
   object EditNoviNaziv: TEdit
-    Left = 864
+    Left = 880
     Top = 144
     Width = 177
     Height = 23
     TabOrder = 1
   end
   object EditNovaGodina: TEdit
-    Left = 864
+    Left = 880
     Top = 173
     Width = 177
     Height = 23
@@ -156,14 +156,14 @@ object FormSviFilmovi: TFormSviFilmovi
     OnClick = ButtonUkloniClick
   end
   object EditNovoTrajanje: TEdit
-    Left = 864
+    Left = 880
     Top = 207
     Width = 177
     Height = 23
     TabOrder = 9
   end
   object MemoOpisNovogFilma: TMemo
-    Left = 864
+    Left = 880
     Top = 236
     Width = 177
     Height = 93

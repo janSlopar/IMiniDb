@@ -1,4 +1,4 @@
-//---------------------------------------------------------------------------
+﻿//---------------------------------------------------------------------------
 
 #include <vcl.h>
 #pragma hdrstop
@@ -18,6 +18,15 @@
 #pragma resource "*.dfm"
 TFormSviFilmovi *FormSviFilmovi;
 //---------------------------------------------------------------------------
+/*
+	 TO-DO
+	 - Editiranje naslova, godine, trajanja ili opisa filma uz upozorenje
+	   (pop-up ping !!!) prilikom potvrde. -> za zadatak JSON / XML
+	 - ...
+     - Ljepše formuliraj objašnjenja u prijavnici
+
+*/
+//---------------------------------------------------------------------------
 __fastcall TFormSviFilmovi::TFormSviFilmovi(TComponent* Owner)
 	: TForm(Owner)
 {
@@ -26,7 +35,8 @@ __fastcall TFormSviFilmovi::TFormSviFilmovi(TComponent* Owner)
 void __fastcall TFormSviFilmovi::OsvjeziListu()
 {
     _di_IXMLfilmoviType OFilmovi = Getfilmovi(XMLDocumentOmiljeniFilmovi);
-    listViewOFilmovi->Items->Clear();
+	listViewOFilmovi->Items->Clear();
+
     for(int i = 0; i < OFilmovi->Count; i++){
         TListItem *item = listViewOFilmovi->Items->Add();
         item->Caption = OFilmovi->film[i]->naslov;
@@ -46,6 +56,9 @@ void __fastcall TFormSviFilmovi::OcistiPolja()
 //---------------------------------------------------------------------------
 void __fastcall TFormSviFilmovi::FormCreate(TObject *Sender)
 {
+    LabelOmiljeniFilmoviNaslov->Visible = false;
+	LabelListaZaGledanje->Visible = false;
+
 	String path = TPath::Combine(ExtractFilePath(Application->ExeName), "..\\..\\postavke.ini");
 	TIniFile* ini = new TIniFile(path);
 
@@ -93,14 +106,12 @@ void __fastcall TFormSviFilmovi::FormCreate(TObject *Sender)
 	LabelOmiljeniFilmoviNaslov->Font->Color   = (TColor)0x00FFD700;
 	LabelOmiljeniFilmoviNaslov->Alignment     = taCenter;
 	LabelOmiljeniFilmoviNaslov->Transparent   = true;
-	LabelOmiljeniFilmoviNaslov->Caption       = "";
 
     LabelListaZaGledanje->Font->Size  = 16;
 	LabelListaZaGledanje->Font->Style = TFontStyles() << fsBold;
 	LabelListaZaGledanje->Font->Color = (TColor)0x00FFD700;
 	LabelListaZaGledanje->Alignment   = taCenter;
 	LabelListaZaGledanje->Transparent = true;
-	LabelListaZaGledanje->Visible     = false;
 }
 //---------------------------------------------------------------------------
 
@@ -109,7 +120,7 @@ void __fastcall TFormSviFilmovi::FormCreate(TObject *Sender)
 void __fastcall TFormSviFilmovi::ButtonOmiljeniFilmoviClick(TObject *Sender)
 {
 
-	/*// Ili iz TBytes (ako ima� poster kao byte array)
+	/*// Ili iz TBytes (ako imaš poster kao byte array)
 	TMemoryStream *stream = new TMemoryStream();
 	stream->Write(film.poster.get(), film.poster.Length);
 	stream->Position = 0;
@@ -128,6 +139,7 @@ void __fastcall TFormSviFilmovi::ButtonHRVClick(TObject *Sender)
 	String path = TPath::Combine(ExtractFilePath(Application->ExeName), "..\\..\\postavke.ini");
 	TIniFile* ini = new TIniFile(path);
 
+    LabelOmiljeniFilmoviNaslov->Caption = ini->ReadString("HR", "LabelOmiljeniFilmoviNaslov", "Omiljeni Filmovi");
 	(*listViewOFilmovi->Columns)[0]->Caption = ini->ReadString("HR", "label6", "");
 	(*listViewOFilmovi->Columns)[1]->Caption = ini->ReadString("HR", "label7", "");
 	(*listViewOFilmovi->Columns)[2]->Caption = ini->ReadString("HR", "label8", "");
@@ -205,7 +217,7 @@ void __fastcall TFormSviFilmovi::ButtonUkloniClick(TObject *Sender)
 void __fastcall TFormSviFilmovi::ButtonDodajWatchlistuClick(TObject *Sender)
 {
     if (listViewOFilmovi->Selected == NULL) {
-        ShowMessage("Odaberi film za dodavanje na watchlistu!");
+        ShowMessage("Odaberi film za dodavanje na listu!" + sLineBreak + "Select a movie to add to the watchlist!");
         return;
     }
 
@@ -238,7 +250,7 @@ void __fastcall TFormSviFilmovi::ButtonDodajWatchlistuClick(TObject *Sender)
                     for (int i = 0; i < postojeciArray->Count; i++) {
                         TJSONObject *obj = static_cast<TJSONObject*>(postojeciArray->Items[i]);
                         if (obj->GetValue("naslov")->Value() == naslov) {
-                            ShowMessage("Film je vec na watchlisti!");
+                            ShowMessage("Film je već na listi!" + sLineBreak + "Movie is already on the watchlist!");
                             delete jsonArray;
                             delete parsiran;
                             return;
@@ -270,10 +282,10 @@ void __fastcall TFormSviFilmovi::ButtonDodajWatchlistuClick(TObject *Sender)
 
         delete jsonArray;
 
-        ShowMessage("Uspjesno dodano!");
+      	ShowMessage("Uspješno dodano!" + sLineBreak + "Successfully added!");
 
     } catch (Exception &e) {
-        ShowMessage("GRESKA: " + e.Message);
+        ShowMessage(e.Message);
     }
 }
 //---------------------------------------------------------------------------
@@ -282,12 +294,13 @@ void __fastcall TFormSviFilmovi::ButtonPregledajListuClick(TObject *Sender)
 {
     LabelOmiljeniFilmoviNaslov->Visible = false;
 	LabelListaZaGledanje->Visible = true;
+
 	String jsonPath = TPath::Combine(ExtractFilePath(Application->ExeName), "..\\..\\listZaGledanje.json");
 
     if (!TFile::Exists(jsonPath)) {
-        ShowMessage("Watchlista je prazna!");
+		ShowMessage("Lista je prazna!" + sLineBreak + "List is empty!");
         return;
-    }
+	}
 
     try {
         TStringList *sl = new TStringList();
@@ -296,14 +309,14 @@ void __fastcall TFormSviFilmovi::ButtonPregledajListuClick(TObject *Sender)
         delete sl;
 
         if (sadrzaj.IsEmpty()) {
-            ShowMessage("Watchlista je prazna!");
+			ShowMessage("Lista je prazna!" + sLineBreak + "List is empty!");
             return;
         }
 
-        TJSONValue *parsiran = TJSONObject::ParseJSONValue(sadrzaj);
-        if (!parsiran || !parsiran->ClassNameIs("TJSONArray")) {
-            ShowMessage("Greska pri citanju watchliste!");
-            delete parsiran;
+		TJSONValue *parsiran = TJSONObject::ParseJSONValue(sadrzaj);
+		if (!parsiran || !parsiran->ClassNameIs("TJSONArray")) {
+			ShowMessage("Greška pri čitanju watchliste!" + sLineBreak + "Error reading watchlist!");
+			delete parsiran;
             return;
         }
 
@@ -324,7 +337,7 @@ void __fastcall TFormSviFilmovi::ButtonPregledajListuClick(TObject *Sender)
         delete parsiran;
 
     } catch (Exception &e) {
-        ShowMessage("GRESKA: " + e.Message);
+        ShowMessage(e.Message);
     }
 }
 //---------------------------------------------------------------------------
