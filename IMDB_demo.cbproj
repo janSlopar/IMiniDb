@@ -184,6 +184,12 @@
         <None Include="DataTypes.h">
             <BuildOrder>4</BuildOrder>
         </None>
+        <CppCompile Include="Dobrodosli.cpp">
+            <Form>FormDobrodosli</Form>
+            <FormType>dfm</FormType>
+            <DependentOn>Dobrodosli.h</DependentOn>
+            <BuildOrder>11</BuildOrder>
+        </CppCompile>
         <CppCompile Include="IMDB_demo.cpp">
             <BuildOrder>0</BuildOrder>
         </CppCompile>
@@ -227,6 +233,7 @@
             <DependentOn>Stilovi.h</DependentOn>
             <BuildOrder>8</BuildOrder>
         </CppCompile>
+        <FormResources Include="Dobrodosli.dfm"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
