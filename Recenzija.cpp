@@ -95,7 +95,7 @@ void __fastcall TFormRecenzija::ButtonSpremiRecenzijuClick(TObject *Sender)
             ShowMessage("Recenzija uspjesno izmijenjena!");
             UcitajFilmoveUCombo();
             cmbFilm->ItemIndex = 0;
-            cmbFilmChange(nullptr);
+            cmbFilmChange(NULL);
             ModalResult = mrOk;
 
         } catch (Exception &e) {
@@ -162,7 +162,7 @@ void __fastcall TFormRecenzija::ButtonSpremiRecenzijuClick(TObject *Sender)
         ShowMessage("Recenzija uspjesno spremljena!");
         UcitajFilmoveUCombo();
         cmbFilm->ItemIndex = 0;
-        cmbFilmChange(nullptr);
+        cmbFilmChange(NULL);
         ModalResult = mrOk;
 
     } catch (Exception &e) {
@@ -187,7 +187,7 @@ void __fastcall TFormRecenzija::ButtonSpremiRecenzijuClick(TObject *Sender)
 void __fastcall TFormRecenzija::ButtonOdustaniClick(TObject *Sender)
 {
     cmbFilm->ItemIndex = 0;
-    cmbFilmChange(nullptr);
+    cmbFilmChange(NULL);
 }
 //---------------------------------------------------------------------------
 void __fastcall TFormRecenzija::cmbFilmChange(TObject *Sender)

@@ -15,13 +15,12 @@ CREATE TABLE korisnik (
 -- =========================
 -- ADMIN (nasljeđuje korisnika)
 -- =========================
-CREATE TABLE ADMIN (
+CREATE TABLE `admin` (
     korisnik_id INT PRIMARY KEY,
     razina INT,
     odjel VARCHAR(100),
     FOREIGN KEY (korisnik_id) REFERENCES korisnik(id) ON DELETE CASCADE
 );
-
 -- =========================
 -- FILM
 -- =========================

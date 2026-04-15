@@ -135,4 +135,18 @@ object FormRegistracija: TFormRegistracija
     TabOrder = 3
     OnClick = ButtonENGClick
   end
+  object FDConnectionIMiniDB: TFDConnection
+    Params.Strings = (
+      'Database=iminidb'
+      'User_Name=root'
+      'Password=admin'
+      'DriverID=MySQL')
+    Left = 824
+    Top = 16
+  end
+  object FDPhysMySQLDriverLink1: TFDPhysMySQLDriverLink
+    VendorLib = 'C:\Users\Jan\Desktop\4sem\NTP\libmysql.dll'
+    Left = 912
+    Top = 48
+  end
 end

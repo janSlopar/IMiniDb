@@ -364,7 +364,7 @@ void __fastcall TFormSviFilmovi::ButtonPregledajListuClick(TObject *Sender)
 void __fastcall TFormSviFilmovi::listViewOFilmoviSelectItem(TObject *Sender, TListItem *Item,
           bool Selected)
 {
-    if (!Selected || Item == nullptr) return;
+    if (!Selected || Item == NULL) return;
 
     int idx = listViewOFilmovi->ItemIndex;
     if (idx < 0) return;
