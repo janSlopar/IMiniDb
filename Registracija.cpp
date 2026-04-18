@@ -6,9 +6,10 @@
 #include "Registracija.h"
 #include "DataTypes.h"
 #include "Stilovi.h"
-#include <registry.hpp>
-#include <System.IOUtils.hpp>
 #include "Jezik_INI.h"
+
+#include <System.IOUtils.hpp>
+#include <registry.hpp>
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
@@ -23,6 +24,14 @@ void __fastcall TFormRegistracija::ButtonRegistrirajClick(TObject *Sender)
 {
     EditLozinka->PasswordChar = '*';
 	Korisnik K_test;
+    // validacija
+    if (EditIme->Text.IsEmpty() || EditPrezime->Text.IsEmpty() ||
+        EditKorIme->Text.IsEmpty() || EditEmail->Text.IsEmpty() ||
+        EditLozinka->Text.IsEmpty())
+    {
+        ShowMessage("Molim popuni sva polja.");
+        return;
+	}
 
 	K_test.setIme(EditIme->Text);
     K_test.setPrezime(EditPrezime->Text);
@@ -30,7 +39,60 @@ void __fastcall TFormRegistracija::ButtonRegistrirajClick(TObject *Sender)
 	K_test.setEmail(EditEmail->Text);
 	K_test.setLozinka(EditLozinka->Text);
 
-	ShowMessage("Pozdrav, " + K_test.getKorIme() + "!");
+
+     TFDQuery *Query = new TFDQuery(NULL);
+    try
+    {
+		Query->Connection = FDConnectionIMiniDB;
+        Query->SQL->Text =
+            "INSERT INTO korisnik (ime, prezime, korisnicko_ime, email, lozinka_hash) "
+            "VALUES (:ime, :prezime, :kor_ime, :email, :lozinka_hash)";
+
+        Query->ParamByName("ime")->AsString          = K_test.getIme();
+        Query->ParamByName("prezime")->AsString      = K_test.getPrezime();
+        Query->ParamByName("kor_ime")->AsString      = K_test.getKorIme();
+        Query->ParamByName("email")->AsString        = K_test.getEmail();
+        Query->ParamByName("lozinka_hash")->AsString = K_test.getLozinkaHash();
+
+        try
+        {
+			if (!FDConnectionIMiniDB->Connected)
+                FDConnectionIMiniDB->Connected = true;
+
+            Query->ExecSQL();
+            ShowMessage("Pozdrav, " + K_test.getKorIme() + "! Uspješno si registriran.");
+
+            // Očisti polja nakon uspjeha
+            EditIme->Clear();
+            EditPrezime->Clear();
+            EditKorIme->Clear();
+            EditEmail->Clear();
+			EditLozinka->Clear();
+        }
+        catch (EFDDBEngineException &e)
+        {
+            // Duplikat (UNIQUE constraint na korisnicko_ime ili email)
+			if (e.Message.Pos("Duplicate") > 0 || e.Message.Pos("duplicate") > 0){
+				ShowMessage("Korisnicko ime ili email vec postoji.");
+
+				EditKorIme->Clear();
+				EditEmail->Clear();
+				EditLozinka->Clear();
+			}
+            else
+                ShowMessage("Greška baze: " + e.Message);
+        }
+        catch (Exception &e)
+        {
+            ShowMessage("Greška: " + e.Message);
+        }
+    }
+    __finally
+    {
+        delete Query;
+    }
+
+	//ShowMessage("Pozdrav, " + K_test.getKorIme() + "!");
 
 }
 //---------------------------------------------------------------------------

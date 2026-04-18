@@ -16,8 +16,15 @@ class Korisnik {
         void setPrezime(AnsiString _prezime);
         void setKorisnickoIme(AnsiString _korIme);
         void setEmail(AnsiString _email);
-        void setLozinka(AnsiString _lozinka);
+		void setLozinka(AnsiString _lozinka);
+
+        //int getId() const;
+        AnsiString getIme() const;
+        AnsiString getPrezime() const;
         AnsiString getKorIme() const;
+        AnsiString getEmail() const;
+		AnsiString getLozinkaHash() const;
+
         Korisnik() {}
         Korisnik(int id, AnsiString korIme, AnsiString email, AnsiString lozinka);
         bool prijava(AnsiString lozinka);

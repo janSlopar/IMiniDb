@@ -22,7 +22,7 @@
 #include <FireDAC.Phys.MySQL.hpp>
 #include <FireDAC.Phys.MySQLDef.hpp>
 #include <FireDAC.Phys.SQLiteVDataSet.hpp>
-#include <Vcl.DBGrids.hpp>
+
 #include <Vcl.Grids.hpp>
 #include <FireDAC.Comp.DataSet.hpp>
 #include <FireDAC.DApt.hpp>
@@ -50,7 +50,6 @@ __published:	// IDE-managed Components
 	TButton *ButtonENG;
 	TFDConnection *FDConnectionIMiniDB;
 	TFDPhysMySQLDriverLink *FDPhysMySQLDriverLink1;
-	TDBGrid *DBGrid1;
 	TDataSource *DataSource1;
 	TFDTable *FDTable1;
 	void __fastcall ButtonRegistrirajClick(TObject *Sender);

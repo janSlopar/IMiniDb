@@ -9,6 +9,8 @@
 #include <Vcl.Forms.hpp>
 #include <Vcl.Samples.Spin.hpp>
 #include <Vcl.ComCtrls.hpp>
+#include "frCoreClasses.hpp"
+#include "frxClass.hpp"
 //---------------------------------------------------------------------------
 class TFormRecenzija : public TForm
 {
@@ -33,10 +35,16 @@ __published:	// IDE-managed Components
 	TLabel *LabelOcjena8;
 	TLabel *LabelOcjena9;
 	TLabel *LabelOcjena10;
+	TComboBox *cmbFilm;
+	TButton *ButtonPDF;
+	TfrxReport *frxReportRecenzija;
 	void __fastcall ButtonSpremiRecenzijuClick(TObject *Sender);
 	void __fastcall ButtonOdustaniClick(TObject *Sender);
 	void __fastcall FormCreate(TObject *Sender);
+	void __fastcall cmbFilmChange(TObject *Sender);
 private:	// User declarations
+    int editIndex;
+	void UcitajFilmoveUCombo();
 public:		// User declarations
 	__fastcall TFormRecenzija(TComponent* Owner);
 };

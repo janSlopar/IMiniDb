@@ -110,7 +110,7 @@ object FormRecenzija: TFormRecenzija
       Caption = '10'
     end
     object ButtonSpremiRecenziju: TButton
-      Left = 288
+      Left = 143
       Top = 528
       Width = 225
       Height = 94
@@ -119,7 +119,7 @@ object FormRecenzija: TFormRecenzija
       OnClick = ButtonSpremiRecenzijuClick
     end
     object ButtonOdustani: TButton
-      Left = 544
+      Left = 435
       Top = 528
       Width = 225
       Height = 94
@@ -161,6 +161,14 @@ object FormRecenzija: TFormRecenzija
       Position = 1
       TabOrder = 5
     end
+    object ButtonPDF: TButton
+      Left = 720
+      Top = 528
+      Width = 217
+      Height = 94
+      Caption = 'PDF'
+      TabOrder = 6
+    end
   end
   object cmbFilm: TComboBox
     Left = 563
@@ -169,5 +177,42 @@ object FormRecenzija: TFormRecenzija
     Height = 23
     TabOrder = 1
     OnChange = cmbFilmChange
+  end
+  object frxReportRecenzija: TfrxReport
+    Version = '2024.1.2'
+    DotMatrixReport = False
+    IniFile = '\Software\Fast Reports'
+    PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick, pbCopy, pbSelection, pbWatermarks]
+    PreviewOptions.Zoom = 1.000000000000000000
+    PrintOptions.Printer = 'Default'
+    PrintOptions.PrintOnSheet = 0
+    ReportOptions.CreateDate = 46130.617870405090000000
+    ReportOptions.LastChange = 46130.617870405090000000
+    ScriptLanguage = 'PascalScript'
+    ScriptText.Strings = (
+      'begin'
+      ''
+      'end.')
+    Left = 1216
+    Top = 112
+    Datasets = <>
+    Variables = <>
+    Style = <>
+    Watermarks = <>
+    object Data: TfrxDataPage
+      Height = 1000.000000000000000000
+      Width = 1000.000000000000000000
+    end
+    object Page1: TfrxReportPage
+      PaperWidth = 215.900000000000000000
+      PaperHeight = 279.400000000000000000
+      PaperSize = 1
+      LeftMargin = 10.000000000000000000
+      RightMargin = 10.000000000000000000
+      TopMargin = 10.000000000000000000
+      BottomMargin = 10.000000000000000000
+      Frame.Typ = []
+      MirrorMode = []
+    end
   end
 end

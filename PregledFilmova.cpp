@@ -593,13 +593,13 @@ void __fastcall TFormSviFilmovi::OsvjeziTablicutomZapisu()
     TBookmark bm = FDTableFilm->GetBookmark();
     FDTableFilm->DisableControls();
     try {
-        FDTableFilm->Close();
-        FDTableFilm->Open();
+		FDTableFilm->Close();
+		FDTableFilm->Open();
         FDTableFilm->GotoBookmark(bm);
     }
     __finally {
         FDTableFilm->FreeBookmark(bm);
-        FDTableFilm->EnableControls();
+		FDTableFilm->EnableControls();
     }
 }
 
@@ -701,7 +701,7 @@ void __fastcall TFormSviFilmovi::DBGridFilmoviBazaCellClick(TColumn *Column)
 
     String imdbID = FDTableFilm->FieldByName("imdbID")->AsString;
 
-    if (!PosterPostojiUBazi(imdbID)) {
+	if (!PosterPostojiUBazi(imdbID)) {
         SpremiPosterUBazu();
 		OsvjeziTablicutomZapisu();
     }

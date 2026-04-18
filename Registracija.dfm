@@ -135,19 +135,6 @@ object FormRegistracija: TFormRegistracija
     TabOrder = 3
     OnClick = ButtonENGClick
   end
-  object DBGrid1: TDBGrid
-    Left = 1032
-    Top = 240
-    Width = 450
-    Height = 273
-    DataSource = DataSource1
-    TabOrder = 4
-    TitleFont.Charset = DEFAULT_CHARSET
-    TitleFont.Color = clWindowText
-    TitleFont.Height = -12
-    TitleFont.Name = 'Segoe UI'
-    TitleFont.Style = []
-  end
   object FDConnectionIMiniDB: TFDConnection
     Params.Strings = (
       'Database=iminidb'

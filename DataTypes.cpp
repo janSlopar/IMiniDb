@@ -31,7 +31,26 @@ void Korisnik::setLozinka(AnsiString _lozinka){
     lozinkaHash = _lozinka;
 }
 
-AnsiString Korisnik::getKorIme() const { return korIme;}
+AnsiString Korisnik::getIme() const {
+    return ime;
+}
+
+AnsiString Korisnik::getPrezime() const {
+    return prezime;
+}
+
+AnsiString Korisnik::getKorIme() const {
+    return korIme;
+}
+
+AnsiString Korisnik::getEmail() const {
+    return email;
+}
+
+AnsiString Korisnik::getLozinkaHash() const {
+    return lozinkaHash;
+}
+
 
 Korisnik::Korisnik(int id, AnsiString korIme, AnsiString email, AnsiString lozinka) : id(id), korIme(korIme), email(email){
 	this->lozinkaHash  = hashirajLozinku(lozinka);

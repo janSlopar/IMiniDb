@@ -11,6 +11,8 @@
 #include <System.JSON.Writers.hpp>
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
+#pragma link "frCoreClasses"
+#pragma link "frxClass"
 #pragma resource "*.dfm"
 TFormRecenzija *FormRecenzija;
 //---------------------------------------------------------------------------
