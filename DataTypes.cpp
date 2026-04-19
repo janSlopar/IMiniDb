@@ -109,7 +109,9 @@ AnsiString Film::GetNaslov()    { return naslov; }
 int Film::GetGodina()           { return godina; }
 int Film::GetTrajanje()         { return trajanje; }
 AnsiString Film::GetOpis()      { return opis; }
-TBytes Film::GetPoster()        { return poster; }
+System::Sysutils::TBytes Film::GetPoster() {
+    return poster;
+}
 
 
 

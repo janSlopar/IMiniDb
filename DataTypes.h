@@ -49,7 +49,7 @@ class Film {
         int godina;
         int trajanje;
         AnsiString opis;
-        TBytes poster;
+        System::Sysutils::TBytes poster;
 
         AnsiString imdbID;
         AnsiString rated;
@@ -86,7 +86,7 @@ class Film {
         int GetGodina();
         int GetTrajanje();
         AnsiString GetOpis();
-        TBytes GetPoster();
+        System::Sysutils::TBytes GetPoster();
 
         // --- dodani getteri ---
         AnsiString GetImdbID();

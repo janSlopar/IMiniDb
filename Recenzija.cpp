@@ -13,6 +13,10 @@
 #pragma link "frCoreClasses"
 #pragma link "frxClass"
 #pragma link "frxDBSet"
+#pragma link "PdfDoc"
+#pragma link "PReport"
+#pragma link "frxExportBaseDialog"
+#pragma link "frxExportPDF"
 #pragma resource "*.dfm"
 TFormRecenzija *FormRecenzija;
 
@@ -158,7 +162,7 @@ void __fastcall TFormRecenzija::DohvatiRecenzijeIzBazeUJSON()
 
             TFileStream *fs = new TFileStream(putanja, fmCreate);
             try {
-                TBytes bytes = TEncoding::UTF8->GetBytes(jsonString);
+                System::Sysutils::TBytes bytes = TEncoding::UTF8->GetBytes(jsonString);
                 if (bytes.Length > 0)
                     fs->WriteBuffer(&bytes[0], bytes.Length);
             } __finally {
@@ -277,7 +281,7 @@ void __fastcall TFormRecenzija::ButtonSpremiRecenzijuClick(TObject *Sender)
             obj->RemovePair("datum");  obj->AddPair("datum",  FormatDateTime("yyyy-mm-dd", dtpDatum->Date));
 
             TFileStream *fs = new TFileStream(putanja, fmCreate);
-            TBytes bytes = TEncoding::UTF8->GetBytes(arr->ToString());
+            System::Sysutils::TBytes bytes = TEncoding::UTF8->GetBytes(arr->ToString());
             fs->WriteBuffer(&bytes[0], bytes.Length);
             delete fs;
             delete root;
@@ -332,7 +336,7 @@ void __fastcall TFormRecenzija::ButtonSpremiRecenzijuClick(TObject *Sender)
 
         String jsonString = jsonArray->ToString();
         TFileStream *fs = new TFileStream(putanja, fmCreate);
-        TBytes bytes = TEncoding::UTF8->GetBytes(jsonString);
+        System::Sysutils::TBytes bytes = TEncoding::UTF8->GetBytes(jsonString);
         fs->WriteBuffer(&bytes[0], bytes.Length);
         delete fs;
         delete jsonArray;
@@ -354,8 +358,12 @@ void __fastcall TFormRecenzija::ButtonSpremiRecenzijuClick(TObject *Sender)
 
 void __fastcall TFormRecenzija::ButtonPDFClick(TObject *Sender)
 {
-	frxReportRecenzije->ShowReport();
-	PReportRecenzije->
+	AnsiString put = ExtractFilePath(Application->ExeName) + "..\\..\\izvjestaj.pdf";
+	frxPDFExport1->FileName = put;
+	frxPDFExport1->ShowProgress = false;
+	frxPDFExport1->ShowDialog   = false;
+	frxReportRecenzije->PrepareReport(true);
+	frxReportRecenzije->Export(frxPDFExport1);
 }
 //---------------------------------------------------------------------------
 

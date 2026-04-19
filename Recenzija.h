@@ -32,6 +32,10 @@
 #include <FireDAC.DatS.hpp>
 #include <FireDAC.Stan.Param.hpp>
 #include "frxDBSet.hpp"
+#include "PdfDoc.hpp"
+#include "PReport.hpp"
+#include "frxExportBaseDialog.hpp"
+#include "frxExportPDF.hpp"
 //---------------------------------------------------------------------------
 class TFormRecenzija : public TForm
 {
@@ -68,6 +72,7 @@ __published:	// IDE-managed Components
 	TfrxDBDataset *frxDBDatasetRecenzije;
 	TfrxDBDataset *frxDBDatasetKorisnik;
 	TPReport *PReportRecenzije;
+	TfrxPDFExport *frxPDFExport1;
 	void __fastcall ButtonSpremiRecenzijuClick(TObject *Sender);
 	void __fastcall ButtonOdustaniClick(TObject *Sender);
 	void __fastcall FormCreate(TObject *Sender);
