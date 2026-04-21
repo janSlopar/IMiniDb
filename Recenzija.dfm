@@ -13,8 +13,8 @@ object FormRecenzija: TFormRecenzija
   OnCreate = FormCreate
   TextHeight = 15
   object GroupBoxRecenzija: TGroupBox
-    Left = 96
-    Top = 56
+    Left = 104
+    Top = 8
     Width = 1041
     Height = 689
     TabOrder = 0
@@ -179,6 +179,19 @@ object FormRecenzija: TFormRecenzija
     TabOrder = 1
     OnChange = cmbFilmChange
   end
+  object DBGridLookUpRecenzije: TDBGrid
+    Left = 336
+    Top = 703
+    Width = 641
+    Height = 185
+    DataSource = DataSourceRecenzije
+    TabOrder = 2
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -12
+    TitleFont.Name = 'Segoe UI'
+    TitleFont.Style = []
+  end
   object frxReportRecenzija: TfrxReport
     Version = '2024.1.2'
     DotMatrixReport = False
@@ -245,6 +258,65 @@ object FormRecenzija: TFormRecenzija
     TableName = 'iminidb.recenzija'
     Left = 1168
     Top = 344
+    object FDTableRecenzijeRecenzirao: TStringField
+      DisplayWidth = 20
+      FieldKind = fkLookup
+      FieldName = 'Recenzirao'
+      LookupDataSet = FDTableKorisnik
+      LookupKeyFields = 'id'
+      LookupResultField = 'korisnicko_ime'
+      KeyFields = 'korisnik_id'
+      Lookup = True
+    end
+    object FDTableRecenzijeid: TFDAutoIncField
+      DisplayWidth = 2
+      FieldName = 'id'
+      Origin = 'id'
+      ReadOnly = False
+    end
+    object FDTableRecenzijenaslov: TStringField
+      DisplayWidth = 16
+      FieldName = 'naslov'
+      Origin = 'naslov'
+      Required = True
+      Size = 255
+    end
+    object FDTableRecenzijeStudentIme: TStringField
+      DisplayWidth = 16
+      FieldKind = fkLookup
+      FieldName = 'StudentIme'
+      LookupDataSet = FDTableKorisnik
+      LookupKeyFields = 'id'
+      LookupResultField = 'ime'
+      KeyFields = 'korisnik_id'
+      Visible = False
+      Lookup = True
+    end
+    object FDTableRecenzijetekst: TMemoField
+      AutoGenerateValue = arDefault
+      DisplayWidth = 16
+      FieldName = 'tekst'
+      Origin = 'tekst'
+      BlobType = ftMemo
+    end
+    object FDTableRecenzijeocjena: TIntegerField
+      AutoGenerateValue = arDefault
+      DisplayWidth = 16
+      FieldName = 'ocjena'
+      Origin = 'ocjena'
+    end
+    object FDTableRecenzijedatum: TDateTimeField
+      AutoGenerateValue = arDefault
+      DisplayWidth = 16
+      FieldName = 'datum'
+      Origin = 'datum'
+    end
+    object FDTableRecenzijekorisnik_id: TIntegerField
+      AutoGenerateValue = arDefault
+      DisplayWidth = 16
+      FieldName = 'korisnik_id'
+      Origin = 'korisnik_id'
+    end
   end
   object FDTableKorisnik: TFDTable
     Active = True
@@ -514,8 +586,8 @@ object FormRecenzija: TFormRecenzija
     CreationDate = 46131.518686076390000000
     UseOutlines = False
     ViewerPreference = []
-    Left = 1192
-    Top = 832
+    Left = 1288
+    Top = 824
   end
   object frxPDFExport1: TfrxPDFExport
     UseFileCache = True
@@ -542,7 +614,17 @@ object FormRecenzija: TFormRecenzija
     PDFStandard = psNone
     PDFVersion = pv17
     PDFColorSpace = csDeviceRGB
-    Left = 1040
+    Left = 1160
     Top = 832
+  end
+  object DataSourceRecenzije: TDataSource
+    DataSet = FDTableRecenzije
+    Left = 1176
+    Top = 416
+  end
+  object DataSourceKorisnik: TDataSource
+    DataSet = FDTableKorisnik
+    Left = 1288
+    Top = 424
   end
 end

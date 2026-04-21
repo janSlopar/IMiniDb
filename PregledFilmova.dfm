@@ -1,6 +1,7 @@
 object FormSviFilmovi: TFormSviFilmovi
   Left = 0
   Top = 0
+  Caption = 'MySQL'
   ClientHeight = 1000
   ClientWidth = 1254
   Color = clBtnFace

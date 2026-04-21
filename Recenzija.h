@@ -36,6 +36,8 @@
 #include "PReport.hpp"
 #include "frxExportBaseDialog.hpp"
 #include "frxExportPDF.hpp"
+#include <Vcl.DBGrids.hpp>
+#include <Vcl.Grids.hpp>
 //---------------------------------------------------------------------------
 class TFormRecenzija : public TForm
 {
@@ -73,6 +75,17 @@ __published:	// IDE-managed Components
 	TfrxDBDataset *frxDBDatasetKorisnik;
 	TPReport *PReportRecenzije;
 	TfrxPDFExport *frxPDFExport1;
+	TDBGrid *DBGridLookUpRecenzije;
+	TDataSource *DataSourceRecenzije;
+	TDataSource *DataSourceKorisnik;
+	TFDAutoIncField *FDTableRecenzijeid;
+	TStringField *FDTableRecenzijenaslov;
+	TMemoField *FDTableRecenzijetekst;
+	TIntegerField *FDTableRecenzijeocjena;
+	TDateTimeField *FDTableRecenzijedatum;
+	TIntegerField *FDTableRecenzijekorisnik_id;
+	TStringField *FDTableRecenzijeStudentIme;
+	TStringField *FDTableRecenzijeRecenzirao;
 	void __fastcall ButtonSpremiRecenzijuClick(TObject *Sender);
 	void __fastcall ButtonOdustaniClick(TObject *Sender);
 	void __fastcall FormCreate(TObject *Sender);
