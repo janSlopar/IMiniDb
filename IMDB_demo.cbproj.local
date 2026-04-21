@@ -1,2 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<BorlandProject/>
+<BorlandProject>
+  <Transactions>
+    <Transaction>2026.04.21 19:55:58.563,=C:\Users\Jan\Desktop\4sem\NTP\File1.cpp</Transaction>
+    <Transaction>2026.04.21 19:56:33.615,C:\Users\Jan\Desktop\4sem\NTP\PosterDretva.cpp=C:\Users\Jan\Desktop\4sem\NTP\File1.cpp</Transaction>
+    <Transaction>2026.04.21 19:57:27.298,C:\Users\Jan\Desktop\4sem\NTP\PosterDretva.cpp=</Transaction>
+    <Transaction>2026.04.21 19:57:37.916,=C:\Users\Jan\Desktop\4sem\NTP\Unit1.cpp</Transaction>
+    <Transaction>2026.04.21 19:57:49.019,C:\Users\Jan\Desktop\4sem\NTP\PosterDretva.h=C:\Users\Jan\Desktop\4sem\NTP\Unit1.h</Transaction>
+    <Transaction>2026.04.21 19:57:49.019,C:\Users\Jan\Desktop\4sem\NTP\PosterDretva.cpp=C:\Users\Jan\Desktop\4sem\NTP\Unit1.cpp</Transaction>
+  </Transactions>
+</BorlandProject>

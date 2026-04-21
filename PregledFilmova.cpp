@@ -13,6 +13,8 @@
 #include <REST.Types.hpp>
 #include <Vcl.Imaging.jpeg.hpp>
 #include <Vcl.Imaging.pngimage.hpp>
+#include <System.Threading.hpp>
+#include <System.SyncObjs.hpp>
 
 // Projektni headeri
 #include "PregledFilmova.h"
@@ -20,6 +22,7 @@
 #include "Jezik_INI.h"
 #include "omiljeniFilmovi.h"
 #include "Funk.h"
+#include "PosterDretva.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
@@ -141,6 +144,9 @@ void __fastcall TFormSviFilmovi::FormCreate(TObject *Sender)
 
 	//sql izracun
    OsvjeziBrojFilmova();
+
+   FCS = new TCriticalSection();
+	FBrojacPostera = 0;
 }
 //---------------------------------------------------------------------------
 
@@ -727,3 +733,45 @@ void __fastcall TFormSviFilmovi::ToolButtonSQLFilterClick(TObject *Sender)
 	DataSourceFilm->DataSet = FDQueryFilterOcjena;
 	SirinaDBGrida();
 }
+
+
+void __fastcall TFormSviFilmovi::ToolButtonSviPosteriClick(TObject *Sender)
+{
+	//thread
+	// 1) Skupi sve imdbID-eve koji jos nemaju poster
+	TStringList *lista = new TStringList();
+	TFDQuery *q = new TFDQuery(NULL);
+	try {
+		q->Connection = FDTableFilm->Connection;
+		q->SQL->Text =
+			"SELECT imdbID, posterUrl FROM Filmovi "
+			"WHERE (poster IS NULL OR LENGTH(poster) < 1000) "
+			"  AND posterUrl IS NOT NULL AND posterUrl <> 'N/A'";
+		q->Open();
+		while (!q->Eof) {
+			lista->AddPair(q->FieldByName("imdbID")->AsString,
+						   q->FieldByName("posterUrl")->AsString);
+			q->Next();
+		}
+	} __finally { delete q; }
+
+	if (lista->Count == 0) {
+		ShowMessage("Svi posteri su vec skinuti.");
+		delete lista;
+		return;
+	}
+
+	FBrojacPostera = 0;
+	int ukupno = lista->Count;
+
+	// 2) Pokreni N paralelnih dretvi
+	for (int i = 0; i < ukupno; i++) {
+		new TPosterDretva(this,
+						  lista->Names[i],
+						  lista->ValueFromIndex[i],
+						  ukupno);
+	}
+	delete lista;
+}
+//---------------------------------------------------------------------------
+

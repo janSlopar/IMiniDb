@@ -210,6 +210,10 @@
             <DependentOn>omiljeniFilmovi.h</DependentOn>
             <BuildOrder>10</BuildOrder>
         </CppCompile>
+        <CppCompile Include="PosterDretva.cpp">
+            <DependentOn>PosterDretva.h</DependentOn>
+            <BuildOrder>13</BuildOrder>
+        </CppCompile>
         <CppCompile Include="PregledFilmova.cpp">
             <Form>FormSviFilmovi</Form>
             <FormType>dfm</FormType>

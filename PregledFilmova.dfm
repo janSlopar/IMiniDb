@@ -243,7 +243,7 @@ object FormSviFilmovi: TFormSviFilmovi
     Height = 41
     Align = alCustom
     ButtonHeight = 23
-    ButtonWidth = 61
+    ButtonWidth = 94
     Caption = 'ToolBar1'
     ShowCaptions = True
     TabOrder = 16
@@ -255,11 +255,18 @@ object FormSviFilmovi: TFormSviFilmovi
       OnClick = ToolButtonSQLSortClick
     end
     object ToolButtonSQLFilter: TToolButton
-      Left = 61
+      Left = 94
       Top = 0
       Caption = 'Preporuka'
       ImageIndex = 1
       OnClick = ToolButtonSQLFilterClick
+    end
+    object ToolButtonSviPosteri: TToolButton
+      Left = 188
+      Top = 0
+      Caption = 'Skini sve postere'
+      ImageIndex = 2
+      OnClick = ToolButtonSviPosteriClick
     end
   end
   object DBImage1: TDBImage
