@@ -42,8 +42,6 @@ VALUES ("jan", "slopar", "slopy_", "js@gmail.com", "lozinkahash")
 
 SELECT * FROM recenzija
 
-ALTER TABLE recenzija ADD COLUMN naslov VARCHAR(255) NOT NULL AFTER id;
-
 -- =========================
 -- ADMIN (nasljeđuje korisnika)
 -- =========================
@@ -93,6 +91,32 @@ CREATE TABLE recenzija (
     korisnik_id INT,
     FOREIGN KEY (korisnik_id) REFERENCES korisnik(id) ON DELETE CASCADE
 );
+
+ALTER TABLE recenzija ADD COLUMN naslov VARCHAR(255) NOT NULL AFTER id;
+
+SELECT * FROM recenzija
+
+-- 1. popuni postojeće filmove
+UPDATE recenzija r
+JOIN Filmovi f ON f.naslov = r.naslov
+SET r.film_id = f.id;
+
+-- 2. Provjeri da su svi popunjeni
+SELECT id, naslov, film_id FROM recenzija WHERE film_id = 0;
+
+-- 3. Obriši naslov stupac (više nije potreban)
+ALTER TABLE recenzija DROP COLUMN naslov;
+
+-- 4. Učini film_id obaveznim
+ALTER TABLE recenzija MODIFY COLUMN film_id INT NOT NULL;
+
+-- 5. Dodaj FK
+ALTER TABLE recenzija 
+    ADD CONSTRAINT fk_recenzija_film 
+    FOREIGN KEY (film_id) REFERENCES Filmovi(id) 
+    ON DELETE CASCADE;
+
+
 
 -- =========================
 -- WATCHLISTA
